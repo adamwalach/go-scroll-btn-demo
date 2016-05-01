@@ -6,6 +6,7 @@ node {
    stage 'Project build'
    sh '''
    /usr/bin/go version
+   go get ./
    go build -o main *.go
    '''
 
