@@ -1,7 +1,7 @@
 node {
 
    stage 'Checkout'
-   env.GOPATH = "${env.WORKSPACE}/go"
+   env.GOPATH = "${env.PWD}/go"
    echo "${env.WORKSPACE}/go"
    sh '''
    env
