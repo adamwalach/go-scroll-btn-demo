@@ -2,6 +2,7 @@ node {
 
    stage 'Checkout'
    env.GOPATH = "${env.WORKSPACE}/go"
+   echo "${env.WORKSPACE}/go"
    sh '''
    go get github.com/adamwalach/go-scroll-btn-demo
    '''
