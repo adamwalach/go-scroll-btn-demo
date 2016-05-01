@@ -1,14 +1,14 @@
 node {
-   pwd
+   echo "${env.PWD}"
    stage 'Checkout'
    env.GOPATH = "${env.PWD}/go"
-   pwd
+   echo "${env.PWD}"
    echo "${env.WORKSPACE}/go"
    sh '''
-   env
+   echo "${env.PWD}"
    go get github.com/adamwalach/go-scroll-btn-demo
    '''
-   pwd
+   echo "${env.PWD}"
    //checkout scm
 
    stage 'Project build'
