@@ -1,12 +1,13 @@
 node {
 
    stage 'Checkout'
-   checkout scm
+   env.GOPATH = "${env.WORKSPACE}/go"
+   go get github.com/adamwalach/go-scroll-btn-demo
+   //checkout scm
 
    stage 'Project build'
    sh '''
    /usr/bin/go version
-   go get ./
    go build -o main *.go
    '''
 
