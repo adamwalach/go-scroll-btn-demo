@@ -5,7 +5,7 @@ node {
    echo "${env.PWD}"
    echo "${env.WORKSPACE}/go"
    sh '''
-   echo "${env.PWD}"
+   echo "$PWD"
    go get github.com/adamwalach/go-scroll-btn-demo
    '''
    echo "${env.PWD}"
