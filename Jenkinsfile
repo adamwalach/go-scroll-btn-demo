@@ -4,6 +4,7 @@ node {
    env.GOPATH = "${env.WORKSPACE}/go"
    echo "${env.WORKSPACE}/go"
    sh '''
+   env
    go get github.com/adamwalach/go-scroll-btn-demo
    '''
    //checkout scm
