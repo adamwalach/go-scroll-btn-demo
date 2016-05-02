@@ -37,7 +37,7 @@ node {
      sh '''
        cd $PROJECT_PATH
        /usr/bin/go version
-       go get -u ./
+       go get ./
        go build -o main *.go
      '''
 
