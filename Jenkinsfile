@@ -4,11 +4,11 @@ node {
    env.GOBIN="${env.WORKSPACE}/go/bin"
 
    stage 'Check environment'
-   echo "
+   echo '''
          WORKSPACE: ${env.WORKSPACE}
          GOPATH: ${env.GOPATH}
          GOBIN: ${env.GOBIN}
-   "
+   '''
 
    stage 'Checkout'
    env.GOPATH = "${env.WORKSPACE}/go"
