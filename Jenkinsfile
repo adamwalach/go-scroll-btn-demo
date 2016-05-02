@@ -22,12 +22,13 @@ node {
       cd "$WORKSPACE"
       rm -rf "./go"
    '''
-   
+
    stage 'Checkout'
    sh '''
      mkdir -p "$PROJECT_PATH"
      cd "$PROJECT_PATH"
-     checkout scm
+     env
+     git([url: 'https://github.com/adamwalach/go-scroll-btn-demo.git', branch: 'master'])
      go get -u ./
    '''
    //checkout scm
