@@ -7,6 +7,8 @@ node {
    env.PROJECT_URL="github.com/${env.PROJECT_NAME}"
    env.PROJECT_PATH="${env.GOPATH}/src/${env.PROJECT_URL}"
 
+   env.IMAGE_NAME="awalach/go-scroll-btn-demo"
+
    stage 'Check environment'
      echo """
        WORKSPACE: ${env.WORKSPACE}
@@ -41,12 +43,15 @@ node {
    stage 'Docker build'
      dir ("${env.PROJECT_PATH}") {
        sh '''
-         docker build -t awalach/go-scroll-btn-demo:$BRANCH_NAME ./
+         docker build -t $IMAGE_NAME:$BRANCH_NAME ./
        '''
      }
 
    stage 'Docker push'
      sh '''
-       docker push awalach/go-scroll-btn-demo:$BRANCH_NAME
+       docker push $IMAGE_NAME:$BRANCH_NAME
      '''
+
+   stage 'Deploy'
+     echo "Deploy"
 }
