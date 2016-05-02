@@ -19,7 +19,7 @@ node {
      """
    stage 'Cleanup'
      //deleteDir "go"
-     deleteDir
+     deleteDir()
     sh '''
        cd "$WORKSPACE"
        rm -rf "./go"
