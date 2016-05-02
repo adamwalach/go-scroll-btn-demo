@@ -17,6 +17,7 @@ node {
        PROJECT_URL: ${env.PROJECT_URL}
        PROJECT_PATH: ${env.PROJECT_PATH}
      """
+
    stage 'Cleanup'
      deleteDir()
 
@@ -38,11 +39,10 @@ node {
      }
 
    stage 'Docker build'
-     sh '''
-       cd $PROJECT_PATH
-       docker build -f $PROJECT_PATH/Dockerfile \
-                  -t awalach/go-scroll-btn-demo:$BRANCH_NAME ./
-   '''
+     dir ("${env.PROJECT_PATH}") {
+       sh '''
+         docker build -t awalach/go-scroll-btn-demo:$BRANCH_NAME ./
+       '''
 
    stage 'Docker push'
      sh '''
