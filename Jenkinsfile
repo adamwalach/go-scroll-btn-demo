@@ -42,7 +42,7 @@ node {
    stage 'Tests'
      dir ("${env.PROJECT_PATH}") {
        sh '''
-         gometalinter --deadline=10s
+         gometalinter --deadline=10s || true
        '''
      }
 
