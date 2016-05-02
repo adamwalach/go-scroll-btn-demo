@@ -6,6 +6,7 @@ node {
    echo "${env.WORKSPACE}/go"
    sh '''
      export GOPATH="$PWD/go"
+     echo $GOPATH
      mkdir -p $GOPATH
      go get -u "github.com/adamwalach/go-scroll-btn-demo"
    '''
@@ -22,6 +23,8 @@ node {
 
    stage 'Docker build'
      sh '''#!/bin/bash
+      echo $GOPATH
+     export GOPATH="$PWD/go"
      docker build -f $GOPATH/src/github.com/adamwalach/go-scroll-btn-demo/Dockerfile \
                   -t awalach/go-scroll-btn-demo:$BRANCH_NAME ./
    '''
