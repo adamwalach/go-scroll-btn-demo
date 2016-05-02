@@ -5,7 +5,7 @@ node {
 
    env.PROJECT_NAME="adamwalach/go-scroll-btn-demo"
    env.PROJECT_URL="github.com/${env.PROJECT_NAME}"
-   env.PROJECT_PATH="${env.GOPATH/src/${env.PROJECT_URL}"
+   env.PROJECT_PATH="${env.GOPATH}/src/${env.PROJECT_URL}"
 
    stage 'Check environment'
    echo """
