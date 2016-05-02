@@ -41,7 +41,7 @@ node {
    stage 'Tests'
      dir ("${env.PROJECT_PATH}") {
        sh '''
-         gometalinter --fast
+         gometalinter --vendor --fast
        '''
      }
 
