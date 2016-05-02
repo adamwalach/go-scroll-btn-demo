@@ -27,11 +27,10 @@ node {
    sh '''
      mkdir -p "$PROJECT_PATH"
      cd "$PROJECT_PATH"
-     env
-     git([url: 'https://github.com/adamwalach/go-scroll-btn-demo.git', branch: 'master'])
+     
+     git([url: 'https://github.com/adamwalach/go-scroll-btn-demo.git', branch: "${env.BRANCH_NAME}"])
      go get -u ./
    '''
-   //checkout scm
 
    stage 'Project build'
    sh '''
