@@ -3,44 +3,43 @@ node {
    env.GOPATH="${env.WORKSPACE}/go"
    env.GOBIN="${env.WORKSPACE}/go/bin"
 
+   env.PROJECT_NAME="adamwalach/go-scroll-btn-demo"
+   env.PROJECT_URL="github.com/${env.PROJECT_NAME}"
+   env.PROJECT_PATH="${env.GOPATH/src/${env.PROJECT_URL}"
+
    stage 'Check environment'
    echo """
          WORKSPACE: ${env.WORKSPACE}
          GOPATH: ${env.GOPATH}
          GOBIN: ${env.GOBIN}
+
+         PROJECT_NAME: ${env.PROJECT_NAME}
+         PROJECT_URL: ${env.PROJECT_URL}
+         PROJECT_PATH: ${env.PROJECT_PATH}
    """
 
    stage 'Checkout'
-   env.GOPATH = "${env.WORKSPACE}/go"
-   echo "${env.PWD}"
-   echo "Workspace: ${env.WORKSPACE}/go"
    sh '''
-     export GOPATH="$WORKSPACE/go"
-     echo $GOPATH
-     mkdir -p $GOPATH
-     go get -u "github.com/adamwalach/go-scroll-btn-demo"
+     mkdir -p "$GOBIN"
+     go get -u "$PROJECT_NAME"
    '''
-   echo "${env.PWD}"
    //checkout scm
 
    stage 'Project build'
    sh '''
-     export GOPATH="$WORKSPACE/go"
-     cd $GOPATH/src/github.com/adamwalach/go-scroll-btn-demo
+     cd $PROJECT_PATH
      /usr/bin/go version
      go build -o main *.go
    '''
 
    stage 'Docker build'
-     sh '''#!/bin/bash
-      echo $GOPATH
-     export GOPATH="$WORKSPACE/go"
-     docker build -f $GOPATH/src/github.com/adamwalach/go-scroll-btn-demo/Dockerfile \
+     sh '''
+     docker build -f $PROJECT_PATH/Dockerfile \
                   -t awalach/go-scroll-btn-demo:$BRANCH_NAME ./
    '''
 
    stage 'Docker push'
-     sh '''#!/bin/bash
-     docker push awalach/go-scroll-btn-demo:$BRANCH_NAME ./
+     sh '''
+     docker push awalach/go-scroll-btn-demo:$BRANCH_NAME
    '''
 }
