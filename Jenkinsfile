@@ -36,7 +36,7 @@ node {
        sh '''
          /usr/bin/go version
          go get ./
-         go build -o main *.go
+         GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -o=main *.go
        '''
      }
    stage 'Tests'
