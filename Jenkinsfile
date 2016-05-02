@@ -34,6 +34,7 @@ node {
 
    stage 'Docker build'
      sh '''
+     cd $PROJECT_PATH
      docker build -f $PROJECT_PATH/Dockerfile \
                   -t awalach/go-scroll-btn-demo:$BRANCH_NAME ./
    '''
