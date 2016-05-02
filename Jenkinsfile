@@ -21,7 +21,7 @@ node {
    stage 'Checkout'
    sh '''
      mkdir -p "$GOBIN"
-     go get -u "$PROJECT_NAME"
+     go get -u "$PROJECT_URL"
    '''
    //checkout scm
 
