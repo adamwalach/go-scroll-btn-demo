@@ -17,7 +17,12 @@ node {
          PROJECT_URL: ${env.PROJECT_URL}
          PROJECT_PATH: ${env.PROJECT_PATH}
    """
-
+   stage 'Cleanup'
+   sh '''
+      cd "$WORKSPACE"
+      rm -rf "./go"
+   '''
+   
    stage 'Checkout'
    sh '''
      mkdir -p "$PROJECT_PATH"
