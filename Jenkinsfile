@@ -1,8 +1,15 @@
 node {
    env.WORKSPACE = pwd()
-   echo "${env.WORKSPACE}"
+   env.GOPATH="${env.WORKSPACE}/go"
+   env.GOBIN="${env.WORKSPACE}/go/bin"
 
-   echo "${env.PWD}"
+   stage 'Check environment'
+   echo "
+         WORKSPACE: ${env.WORKSPACE}
+         GOPATH: ${env.GOPATH}
+         GOBIN: ${env.GOBIN}
+   "
+
    stage 'Checkout'
    env.GOPATH = "${env.WORKSPACE}/go"
    echo "${env.PWD}"
