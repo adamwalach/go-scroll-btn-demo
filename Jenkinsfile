@@ -43,6 +43,7 @@ node {
        sh '''
          docker build -t awalach/go-scroll-btn-demo:$BRANCH_NAME ./
        '''
+     }
 
    stage 'Docker push'
      sh '''
