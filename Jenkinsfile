@@ -31,17 +31,18 @@ node {
        checkout scm
      }
 
+   stage 'Tests'
+     dir ("${env.PROJECT_PATH}") {
+       sh '''
+         gometalinter --vendor --fast --disable gotype
+       '''
+     }
+
    stage 'Project build'
      dir ("${env.PROJECT_PATH}") {
        sh '''
          /usr/bin/go version
          GOOS=linux GOARCH=arm GOARM=5 CGO_ENABLED=0 go build -o=main *.go
-       '''
-     }
-   stage 'Tests'
-     dir ("${env.PROJECT_PATH}") {
-       sh '''
-         gometalinter --vendor --fast
        '''
      }
 
