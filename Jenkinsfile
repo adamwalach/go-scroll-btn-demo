@@ -21,12 +21,13 @@ node {
    '''
 
    stage 'Docker build'
-   sh '''#!/bin/bash
-   docker build -t awalach/go-scroll-btn-demo:$BRANCH_NAME ./
+     sh '''#!/bin/bash
+     docker build -f $GOPATH/src/github.com/adamwalach/go-scroll-btn-demo/Dockerfile \
+                  -t awalach/go-scroll-btn-demo:$BRANCH_NAME ./
    '''
 
-   stage 'Docker build'
-   sh '''#!/bin/bash
-   docker push awalach/go-scroll-btn-demo:$BRANCH_NAME ./
+   stage 'Docker push'
+     sh '''#!/bin/bash
+     docker push awalach/go-scroll-btn-demo:$BRANCH_NAME ./
    '''
 }
