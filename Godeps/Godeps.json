@@ -1,0 +1,23 @@
+{
+	"ImportPath": "github.com/adamwalach/go-scroll-btn-demo",
+	"GoVersion": "go1.6",
+	"Deps": [
+		{
+			"ImportPath": "github.com/golang/glog",
+			"Rev": "23def4e6c14b4da8ac2ed8007337bc5eb5007998"
+		},
+		{
+			"ImportPath": "github.com/kidoman/embd",
+			"Rev": "bfcd1345fe4e3d17ca82475c0c2f3d53120f87a9"
+		},
+		{
+			"ImportPath": "github.com/mrmorphic/hwio",
+			"Comment": "0.2-84-g4af3c0a",
+			"Rev": "4af3c0a919085ce9b99bbe5a8e3334b805618c2e"
+		},
+		{
+			"ImportPath": "github.com/stuphi/scroll-phat-go/scrollphat",
+			"Rev": "8d7f25b3ae8ff6a7683262b838fc7c697797b92b"
+		}
+	]
+}
