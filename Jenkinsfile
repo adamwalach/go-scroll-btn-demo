@@ -39,6 +39,12 @@ node {
          go build -o main *.go
        '''
      }
+   stage 'Tests'
+     dir ("${env.PROJECT_PATH}") {
+       sh '''
+         gometalinter --deadline=10s
+       '''
+     }
 
    stage 'Docker build'
      dir ("${env.PROJECT_PATH}") {
