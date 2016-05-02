@@ -20,18 +20,14 @@ node {
    stage 'Cleanup'
      //deleteDir "go"
      deleteDir()
-    sh '''
-       cd "$WORKSPACE"
-       rm -rf "./go"
-    '''
+    //sh '''
+    //   cd "$WORKSPACE"
+    //   rm -rf "./go"
+    //'''
 
    stage 'Checkout'
-     //dir
      sh '''
        mkdir -p "$PROJECT_PATH"
-       #cd "$PROJECT_PATH"
-       #git clone 'https://github.com/adamwalach/go-scroll-btn-demo.git', branch: "${env.BRANCH_NAME}"])
-       #go get -u ./
      '''
      dir ("${env.PROJECT_PATH}") {
        checkout scm
@@ -41,6 +37,7 @@ node {
      sh '''
        cd $PROJECT_PATH
        /usr/bin/go version
+       go get -u ./
        go build -o main *.go
      '''
 
