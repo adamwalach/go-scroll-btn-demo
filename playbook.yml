@@ -1,0 +1,15 @@
+---
+- hosts: '{{ target }}'
+  tasks:
+    - shell: "docker stop $(docker ps -a -q) || true"
+    - shell: "docker rm $(docker ps -a -q) || true"
+    - shell: "docker rmi -f $(docker images -q --filter \"dangling=true\") || true"
+
+    - name: go-scroll-btn-demo container
+      docker:
+        name: scroll-btn
+        image: awalach/go-scroll-btn-demo:test
+        state: started
+        command: /main
+        pull: always
+        privileged: true
