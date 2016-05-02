@@ -32,8 +32,9 @@ node {
        #git clone 'https://github.com/adamwalach/go-scroll-btn-demo.git', branch: "${env.BRANCH_NAME}"])
        #go get -u ./
      '''
-     dir "${env.PROJECT_PATH}"
-     checkout scm
+     dir ("${env.PROJECT_PATH}") {
+       checkout scm
+     }
 
    stage 'Project build'
      sh '''
