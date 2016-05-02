@@ -77,19 +77,17 @@ func main() {
 	}
 	btn.ActiveLow(false)
 
-	quit := make(chan interface{})
+	btnChannel := make(chan interface{})
 	err = btn.Watch(embd.EdgeFalling, func(btn embd.DigitalPin) {
-		quit <- btn
+		btnChannel <- btn
 		fmt.Printf("Button %v was pressed.\n", btn)
 	})
 	if err != nil {
 		panic(err)
 	}
-	for {
-		select {
-		case btn := <-quit:
-			fmt.Println("!!!!", btn)
-			blink()
-		}
+
+	for btn := range btnChannel {
+		fmt.Println("!!!!", btn)
+		blink()
 	}
 }
