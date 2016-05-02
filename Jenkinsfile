@@ -20,8 +20,10 @@ node {
 
    stage 'Checkout'
    sh '''
-     mkdir -p "$GOBIN"
-     go get -u "$PROJECT_URL"
+     mkdir -p "$PROJECT_PATH"
+     cd "$PROJECT_PATH"
+     checkout scm
+     go get -u ./
    '''
    //checkout scm
 
