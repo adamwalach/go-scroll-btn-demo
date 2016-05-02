@@ -5,16 +5,18 @@ node {
    echo "${env.PWD}"
    echo "${env.WORKSPACE}/go"
    sh '''
-   echo "$PWD"
-   go get github.com/adamwalach/go-scroll-btn-demo
+     export GOPATH = "$PWD/go"
+     go get -u github.com/adamwalach/go-scroll-btn-demo
    '''
    echo "${env.PWD}"
    //checkout scm
 
    stage 'Project build'
    sh '''
-   /usr/bin/go version
-   go build -o main *.go
+     export GOPATH = "$PWD/go"
+     cd $GOPATH/github.com/adamwalach/go-scroll-btn-demo
+     /usr/bin/go version
+     go build -o main *.go
    '''
 
    stage 'Docker build'
