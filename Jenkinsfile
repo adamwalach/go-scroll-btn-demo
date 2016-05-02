@@ -18,12 +18,7 @@ node {
        PROJECT_PATH: ${env.PROJECT_PATH}
      """
    stage 'Cleanup'
-     //deleteDir "go"
      deleteDir()
-    //sh '''
-    //   cd "$WORKSPACE"
-    //   rm -rf "./go"
-    //'''
 
    stage 'Checkout'
      sh '''
@@ -34,12 +29,13 @@ node {
      }
 
    stage 'Project build'
-     sh '''
-       cd $PROJECT_PATH
-       /usr/bin/go version
-       go get ./
-       go build -o main *.go
-     '''
+     dir ("${env.PROJECT_PATH}") {
+       sh '''
+         /usr/bin/go version
+         go get ./
+         go build -o main *.go
+       '''
+     }
 
    stage 'Docker build'
      sh '''
