@@ -54,13 +54,14 @@ node {
      }
 
    stage 'Docker push'
+     dir ("${env.PROJECT_PATH}") {
      sh '''#!/bin/bash
        date
        time docker push $IMAGE_NAME:$BRANCH_NAME
        time docker push $IMAGE_NAME:$BRANCH_NAME
        date
      '''
-
+     }
    stage 'Deploy'
      dir ("${env.PROJECT_PATH}") {
        ansiblePlaybook([playbook: 'playbook.yml'])
