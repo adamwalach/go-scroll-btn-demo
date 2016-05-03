@@ -54,7 +54,7 @@ node {
      }
 
    stage 'Docker push'
-     sh '''
+     sh '''#!/bin/bash
        time docker push $IMAGE_NAME:$BRANCH_NAME
        time docker push $IMAGE_NAME:$BRANCH_NAME
      '''
