@@ -71,25 +71,27 @@ func main() {
 	}
 	defer btn.Close()
 	captureCtrlC(btn)
-	fmt.Println("start")
-	if err := btn.SetDirection(embd.In); err != nil {
+	fmt.Println("Start!")
+	for x := 0; x < 3; x++ {
+		blink()
+	}
+
+	if err = btn.SetDirection(embd.In); err != nil {
 		panic(err)
 	}
 	btn.ActiveLow(false)
 
-	quit := make(chan interface{})
+	btnChannel := make(chan interface{})
 	err = btn.Watch(embd.EdgeFalling, func(btn embd.DigitalPin) {
-		quit <- btn
+		btnChannel <- btn
 		fmt.Printf("Button %v was pressed.\n", btn)
 	})
 	if err != nil {
 		panic(err)
 	}
-	for {
-		select {
-		case btn := <-quit:
-			fmt.Println("!!!!", btn)
-			blink()
-		}
+
+	for btn := range btnChannel {
+		fmt.Println("!!!!", btn)
+		blink()
 	}
 }

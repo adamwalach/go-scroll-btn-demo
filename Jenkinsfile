@@ -7,6 +7,8 @@ node {
    env.PROJECT_URL="github.com/${env.PROJECT_NAME}"
    env.PROJECT_PATH="${env.GOPATH}/src/${env.PROJECT_URL}"
 
+   env.IMAGE_NAME="awalach/go-scroll-btn-demo"
+
    stage 'Check environment'
      echo """
        WORKSPACE: ${env.WORKSPACE}
@@ -29,24 +31,36 @@ node {
        checkout scm
      }
 
+   stage 'Tests'
+     dir ("${env.PROJECT_PATH}") {
+       sh '''
+         gometalinter --vendor --fast --disable gotype
+       '''
+     }
+
    stage 'Project build'
      dir ("${env.PROJECT_PATH}") {
        sh '''
          /usr/bin/go version
-         go get ./
-         go build -o main *.go
+         GOOS=linux GOARCH=arm GOARM=5 CGO_ENABLED=0 go build -o=main *.go
        '''
      }
 
    stage 'Docker build'
      dir ("${env.PROJECT_PATH}") {
        sh '''
-         docker build -t awalach/go-scroll-btn-demo:$BRANCH_NAME ./
+         docker build -t $IMAGE_NAME:$BRANCH_NAME ./
        '''
      }
 
    stage 'Docker push'
-     sh '''
-       docker push awalach/go-scroll-btn-demo:$BRANCH_NAME
+     sh '''#!/bin/bash
+       time docker push $IMAGE_NAME:$BRANCH_NAME
+       time docker push $IMAGE_NAME:$BRANCH_NAME
      '''
+
+   stage 'Deploy'
+     dir ("${env.PROJECT_PATH}") {
+       ansiblePlaybook([playbook: 'playbook.yml'])
+     }
 }

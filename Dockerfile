@@ -1,2 +1,2 @@
-FROM scratch
+FROM sdhibit/rpi-raspbian:jessie
 ADD main /
