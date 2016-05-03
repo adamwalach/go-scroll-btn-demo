@@ -72,6 +72,8 @@ func main() {
 	defer btn.Close()
 	captureCtrlC(btn)
 	fmt.Println("Start!")
+	blink()
+
 	if err = btn.SetDirection(embd.In); err != nil {
 		panic(err)
 	}
