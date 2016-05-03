@@ -62,6 +62,7 @@ node {
        date
      '''
      }
+
    stage 'Deploy'
      dir ("${env.PROJECT_PATH}") {
        ansiblePlaybook([playbook: 'playbook.yml'])
