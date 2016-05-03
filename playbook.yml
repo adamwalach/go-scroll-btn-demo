@@ -12,4 +12,5 @@
         state: started
         command: /main
         pull: always
+        restart_policy: always
         privileged: true
