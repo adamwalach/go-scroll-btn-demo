@@ -91,7 +91,7 @@ func main() {
 	}
 
 	for btn := range btnChannel {
-		fmt.Println("!!!!", btn)
+		fmt.Println("!!!!!", btn)
 		blink()
 	}
 }
