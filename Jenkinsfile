@@ -59,7 +59,6 @@ node {
      '''
 
    stage 'Deploy'
-     echo "Deploy"
      dir ("${env.PROJECT_PATH}") {
        ansiblePlaybook([playbook: 'playbook.yml'])
      }
