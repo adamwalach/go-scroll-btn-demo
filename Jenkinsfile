@@ -55,7 +55,8 @@ node {
 
    stage 'Docker push'
      sh '''
-       docker push $IMAGE_NAME:$BRANCH_NAME
+       time docker push $IMAGE_NAME:$BRANCH_NAME
+       time docker push $IMAGE_NAME:$BRANCH_NAME
      '''
 
    stage 'Deploy'
