@@ -1,0 +1,19 @@
+---
+- hosts: 'pi-zero'
+  tasks:
+    - shell: "docker stop $(docker ps -a -q) || true"
+    - shell: "docker rm $(docker ps -a -q) || true"
+    - shell: "docker rmi -f $(docker images -q --filter \"dangling=true\") || true"
+
+    - name: go-scroll-btn-demo container
+      docker:
+        name: scroll-btn
+        image: awalach/go-scroll-btn-demo:master
+        state: started
+        command: /main
+        pull: always
+        restart_policy: always
+        privileged: true
+        log_driver: gelf
+        log_opt: gelf-address=udp://10.8.0.30:12200
+
